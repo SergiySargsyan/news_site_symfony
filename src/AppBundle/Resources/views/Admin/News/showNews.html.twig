@@ -1,0 +1,29 @@
+{% extends 'AppBundle:Admin/Default:index.html.twig' %}
+{% import '@App/Admin/News/comment.html.twig' as tree %}
+{% block body %}
+
+    <h1>One news page</h1>
+    <h2>{{ news.title }}</h2>
+    <p>{{ news.content }}</p>
+    <img src="{{ news.img }}" width="500" height="500" alt=""><br><br>
+    {% for key, tag in news.tag %}
+        <a href="{{ path('news_by_tag', {name: tag.name} )}}" class="btn btn-default">{{ tag.name }}</a>
+    {% endfor %}
+    <br><br>
+    {{ tree.list(comments) }}
+
+    <div class="panel panel-danger" style="margin-left: 25px">
+        <div class="panel-heading">
+            head
+        </div>
+        <div class="panel-body">
+            body
+        </div>
+        <div class="panel-heading">
+            head
+        </div>
+    </div>
+
+
+
+{% endblock %}

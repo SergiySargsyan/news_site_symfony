@@ -1,0 +1,8 @@
+
+servise
+{% block service %}
+{% for tovar in service %}
+    {% include 'AppBundle:Service:tovar_template.html.twig' %}
+{% endfor %}
+{% endblock %}
+{#{{ dump(service) }}#}

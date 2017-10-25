@@ -1,0 +1,9 @@
+{% extends 'AppBundle::default_layout.html.twig' %}
+
+{% block body %}
+    <h2>News fot tag {{ tag }}</h2>
+    {% for oneNews in news %}
+        <h3><a href="{{ path('news_show_one', {id: oneNews.id} ) }}">{{ oneNews.title }}</a></h3>
+    {% endfor %}
+{% endblock %}
+

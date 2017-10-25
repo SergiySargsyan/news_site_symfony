@@ -1,0 +1,57 @@
+{% macro list(comments, step = 0) %}
+    {% import _self as tree %}
+
+    {% for comment in comments  %}
+        <div class= {% if comment['data'].visible %}
+                        "panel panel-primary"
+                    {% else %}
+                        "panel panel-danger"
+                    {% endif %}
+                style="margin-left: {{25*step}}px">
+
+            <div class="panel-heading">
+                <table width="100%">
+                    <tr>
+                        <td align="left">{{ comment['data'].user.name }}
+                            {% if step == 0 %}
+                                написав:
+                            {% else  %}
+                                вівповів:
+                            {% endif %}
+                        </td>
+                        <td align="right">
+                            {{ (comment['data'].date.date | date('Y-m-d H:i:s')) }}
+                        </td>
+                    </tr>
+                </table>
+                {#<h3 class="panel-title">{{ comment['data'].user.name }}#}
+                        {#{% if step == 0 %}#}
+                            {#написав:#}
+                        {#{% else  %}#}
+                            {#вівповів:#}
+                        {#{% endif %}#}
+                        {#<p align="right"> {{ (comment['data'].date.date | date('Y-m-d H:i:s')) }}</p>#}
+                {#</h3>#}
+            </div>
+            <div class="panel-body">
+                {{ comment['data'].text }}
+            </div>
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-thumbs-up btn btn-success">{{ comment['data'].countLike }}</span>
+                <span class="glyphicon glyphicon-thumbs-down btn btn-danger">{{ comment['data'].countLike }}</span>
+                {% if comment['data'].visible %}
+                    <span class="glyphicon glyphicon-eye-close btn btn-danger navbar-right" style="margin-right: 5px"></span>
+                {% else %}
+                    <span class="glyphicon glyphicon-eye-open btn btn-success navbar-right" style="margin-right: 5px"></span>
+                {% endif %}
+                <span class="glyphicon glyphicon-pencil btn btn-default navbar-right" style="margin-right: 5px"></span>
+                <span class="glyphicon glyphicon-trash btn btn-default navbar-right" style="margin-right: 5px"></span>
+            </div>
+        </div>
+        {#{{ dump(25*step)  }}#}
+
+        {#{{ step }} {{ dump(comment['data'].text) }}#}
+        {{ tree.list(comment['child'], step + 1) }}
+    {% endfor %}
+
+{% endmacro %}

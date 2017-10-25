@@ -1,0 +1,42 @@
+{% extends 'AppBundle::default_layout.html.twig' %}
+
+{% block body %}
+    <h1>category news {{ category }}</h1>
+    <script type="text/javascript" src="{{ asset('bundles/app/js/jquery-3.2.1.min.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('bundles/app/js/jquery.simplePagination.js') }}"></script>
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/app/css/simplePagination.css') }}"/>
+
+    {% for oneNews in news %}
+        <h3><a href="{{ path('news_show_one', {id: oneNews.id} ) }}">{{ oneNews.title }}</a></h3>
+    {% endfor %}
+    <script type="text/javascript">
+        $(function () {
+            $(".forpars").pagination({
+                items: 15,
+                itemsOnPage: 5,
+                pages: 5,
+                currentPage: '<?php echo $page ?>',
+                displayedPages: 1,
+                hrefTextPrefix: '/category/<?php echo $a ?>/',
+                cssStyle: 'dark-theme'
+
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $(".forpars").pagination({
+                items: 15,
+                itemsOnPage: 5,
+                pages: 5,
+                currentPage: '1',
+                displayedPages: 1,
+                hrefTextPrefix: 'text pref',
+                cssStyle: 'dark-theme'
+
+            });
+        });
+    </script>
+{% endblock %}
+

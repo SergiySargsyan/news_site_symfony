@@ -1,0 +1,29 @@
+<script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
+
+<link href="{{ asset('bundles/app/css/window.css') }}" rel="stylesheet">
+    <div class="b-container">
+        Sample Text
+        <a href="javascript:PopUpShow()">Show popup</a>
+    </div>
+    <div class="b-popup" id="popup1">
+        <div class="b-popup-content">
+            Text in Popup
+            <a href="javascript:PopUpHide()">Hide popup</a>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            //Скрыть PopUp при загрузке страницы
+            PopUpHide();
+        });
+        //Функция отображения PopUp
+        function PopUpShow(){
+            $("#popup1").show();
+        }
+        //Функция скрытия PopUp
+        function PopUpHide(){
+            $("#popup1").hide();
+        }
+    </script>
+

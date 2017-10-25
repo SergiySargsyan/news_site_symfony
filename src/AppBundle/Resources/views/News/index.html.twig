@@ -1,0 +1,22 @@
+{% extends 'AppBundle::default_layout.html.twig' %}
+{% block body %}
+    <h1>news page</h1>
+    {#<pre>#}
+        {#<code>#}
+            {#<script>#}
+                {#alert(1);#}
+            {#</script>#}
+        {#</code>#}
+    {#</pre>#}
+    {% for category, news in NewsList %}
+        <h3><a href="{{ path('news_category', {'name': category}) }}">
+                {#{% autoescape 'js'%}#}
+                    {{ category|striptags  }}
+                {#{% endautoescape %}#}
+            </a></h3>
+        {% for oneNews in news %}
+            <a href="{{ path('news_show_one', {id: oneNews.id} )}}">{{  oneNews.title }}</a><br>
+        {% endfor %}
+        <hr>
+    {% endfor %}
+{% endblock %}

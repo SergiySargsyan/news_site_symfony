@@ -1,0 +1,9 @@
+
+
+{#{{ form(formAddCommentAnswer) }}#}
+{{ form_start(formAddCommentAnswer) }}
+    {{ form_row(formAddCommentAnswer.text,{ 'value': 'Submit me' }) }}
+        {#{{ form_widget(formAddCommentAnswer.text, { 'value': 'Submit me' }) }}#}
+    {{ form_row(formAddCommentAnswer.submit) }}
+
+{{ form_end(formAddCommentAnswer) }}

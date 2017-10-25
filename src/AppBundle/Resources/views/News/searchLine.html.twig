@@ -1,0 +1,90 @@
+{#{% extends 'AppBundle::default_layout.html.twig' %}#}
+{#{% block body %}#}
+    {#<style>#}
+        {##ss {#}
+            {#position: fixed;#}
+            {#z-index: 10000;#}
+        {#}#}
+        {##dd {#}
+            {#position: static;#}
+            {#z-index: 10;#}
+        {#}#}
+    {#</style>#}
+    {#<form class="navbar-form navbar-left">#}
+        {#<input type="search" id="search-form" class="form-control" placeholder="Search...">#}
+        {#<li id ='ss' class="search_result"></li>#}
+        {#<img id="dd" src="http://cdn.fishki.net/upload/post/201409/06/1301804/i2dpv50ftpg.jpg" alt="">#}
+    {#</form>#}
+
+    {#<script>#}
+        {#$(document).ready(function () {#}
+            {#$('#search-form').keyup(function(key) {#}
+                {#if (this.value.length >= 1 || this.value == '') {#}
+                    {#var mydata = this.value;#}
+                    {#console.log(mydata);#}
+                    {#$.ajax({#}
+                        {#url: '{{ path('test') }}',#}
+                        {#method: 'GET',#}
+                        {#data: {data: mydata},#}
+                        {#success: function (m) {#}
+                            {#var arr = [];#}
+                            {#var tex = '';#}
+                            {#for( var i = 0; i<m.length; i++){#}
+                                {#arr.push((JSON.parse(m[i])));#}
+                                {#var url = '{{ path("news_by_tag", {"name": "article"}) }}';#}
+                                {#url = url.replace("article", arr[i].name)#}
+                                {#tex = tex + "<a class='list-group-item'  href=\"" + url + '"'+">"+arr[i].name+"</a>";#}
+                            {#}#}
+                            {#console.log(arr[0].name);#}
+                            {#$(".search_result").html(tex).fadeIn();#}
+                        {#}#}
+                    {#})#}
+                {#}#}
+            {#})#}
+        {#})#}
+    {#</script>#}
+
+
+    {#<style>#}
+        {##layer1, #layer2, #layer3, #layer4 {#}
+            {#position: relative; /* Относительное позиционирование */#}
+        {#}#}
+        {##layer1, #layer3 {#}
+            {#font-size: 50px; /* Размер шрифта в пикселах */#}
+            {#color: #000080; /* Синий цвет текста */#}
+        {#}#}
+        {##layer2, #layer4 {#}
+            {#top: -55px; /* Сдвигаем текст вверх */#}
+            {#left: 5px; /* Сдвигаем текст вправо */#}
+            {#color: #ffa500; /* Оранжевый цвет текста */#}
+            {#font-size:70px;  /* Размер шрифта в пикселах */#}
+        {#}#}
+        {##layer1 { z-index: 2; }#}
+        {##layer2 { z-index: 3; }#}
+        {##layer3 { z-index: 3; }#}
+        {##layer4 { z-index: 4; }#}
+    {#</style>#}
+
+    {#<hr>#}
+    {#<select>#}
+        {#<option>Электроник</option>#}
+        {#<option>Сыроежкин</option>#}
+        {#<option>Чижиков</option>#}
+        {#<option>Кукушкина</option>#}
+    {#</select>#}
+    {#<p>Слой 1 наверху</p>#}
+    {#<div id="layer1">Слой 1</div>#}
+    {#<div id="layer2">Слой 2</div>#}
+
+    {#<p>Слой 4 наверху</p>#}
+    {#<div id="layer3">Слой 3</div>#}
+    {#<div id="layer4">Слой 4</div>#}
+
+
+    {#//todo#}
+    {#{{ render(controller('AppBundle:Comment:addComment', {'request': app.request})) }}#}
+    {#{{ render(controller('AppBundle:Comment:commentAnswer', {'request': app.request})) }}#}
+    {#{{ (render(controller('AppBundle:Service:index',{'position': 'left' }))) }}#}
+    {#{{ dump(request) }}#}
+{#{% endblock %}#}
+

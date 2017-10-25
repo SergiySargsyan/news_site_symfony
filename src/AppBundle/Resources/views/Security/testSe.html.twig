@@ -1,0 +1,7 @@
+{% extends 'AppBundle::default_layout.html.twig' %}
+
+{% block body %}
+{{ dump(is_granted('IS_AUTHENTICATED_ANONYMOUSLY')) }}
+    {{ dump(app.user) }}
+{% endblock %}
+

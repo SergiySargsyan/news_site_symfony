@@ -1,0 +1,112 @@
+{#{{ form(form) }}#}
+{{ form_start(form, {'attr': {'id': 'form_comment', 'novalidate': 'novalidate'}}) }}
+    {{ form_widget(form.id, {'id': 'id_tag_id'}) }}
+    {{ form_label(form.text) }}
+    {{ form_widget(form.text,  {'id': 'id_comment_text'}) }}
+    {{ form_label(form.visible) }}
+    {{ form_widget(form.visible,  {'id': 'id_comment_visible'}) }}
+{{ form_end(form) }}
+
+<script>
+    var $form = $('#form_comment');
+    var $messageBox = $('#message');
+    var $id =  $('#id_comment_id.form-control');
+    var $text = $('#id_comment_text.form-control');
+    var $visible = $('#id_comment_visible.form-control');
+
+
+
+
+    $(document).ready(function () {
+
+        $(".glyphicon-pencil").click(function () {
+            $messageBox.empty();
+            $form.fadeIn();
+            var id = $(this).attr("data-comment-id");
+            var comment = $(this).parent().siblings()[1].innerHTML;
+            var visible = $(this).attr("data-comment-visible");
+
+            $t = $(this).parent().siblings()[1];
+            $t = $t.find('div');
+            console.log($t);
+            $id.val(id);
+            $text.val(comment);
+            $visible.val(visible);
+//            console.log($(this).parent().siblings()[1].innerHTML);
+//            $tableName = $(this).parent().siblings()[1];
+
+//            tagValue = $tableName.innerHTML;
+//            $name.val(tagValue);
+//            $id.val(tagId);
+//                $name.attr("value", tagValue);
+//                $id.attr("value", tagId);
+
+        });
+
+        $form.on('submit', function(event) {
+            event.preventDefault();
+            var postData = $name[0].value;
+
+            var formIsValid = true;
+            $messageBox.empty();
+            if (postData == '') {
+                var $b = $('<b>Fill the field<b>');
+                $b.click(function () {
+                    $(this).fadeOut();
+                });
+                $messageBox.html($b);
+                formIsValid = false;
+            }
+            if (!formIsValid) {
+                return false;
+            }
+            var postParams = $form.serialize();
+
+            $.ajax({
+                type: 'POST',
+                url: '{{ path('admin_tag_create') }}',
+                data: postParams,
+                success: (function (response) {
+                    console.log(response);
+                    $name.val(null);
+                    $id.val(null);
+                    $messageBox.html("<b>Success!!</b>");
+                    $form.fadeOut();
+                    $tableName.innerHTML =postData;
+                }),
+                error: (function (response){
+                    console.log(response);
+                    $messageBox.html("<b>Error!!</b>");
+
+                }),
+//                    statusCode: {
+//                        200: handleSuccess,
+//                        201: handleSuccess,
+//                        404: handleFail,
+//                    }
+            })
+        });
+    });
+
+
+    $(".glyphicon-trash").click(function () {
+        $deleteTr = $(this).parent().parent();
+        var id = $(this).attr("data-tag-id");
+        deleteUrl = "{{ path('admin_tag_delete', {'id': 'my_id'}) }}";
+        deleteUrl = deleteUrl.replace("my_id", id);
+        console.log(deleteUrl);
+        $.ajax({
+            type: 'GET',
+            url: deleteUrl,
+            success: (function (response) {
+                console.log($deleteTr);
+                $deleteTr.fadeOut();
+            }),
+            error: (function (response){
+                console.log(response);
+            })
+
+        });
+    });
+
+</script>

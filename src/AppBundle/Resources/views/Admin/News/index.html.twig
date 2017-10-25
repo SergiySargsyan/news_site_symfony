@@ -1,0 +1,53 @@
+{% extends 'AppBundle:Admin/Default:index.html.twig' %}
+
+{% block body %}
+    <br>
+    <a href="{{ path('admin_news_add') }}" class="btn btn-success">Add news</a>
+    <br>
+    <br>
+    <table class="table table-responsive">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th>Views</th>
+            <th>Analyst</th>
+            {#<th>Limit</th>#}
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {#{{ dump(news) }}#}
+        {% for oneNews in news  %}
+            <tr>
+                <td>{{ oneNews.id }}</td>
+                <td><a href="{{ path('admin_news_show', {id: oneNews.id}) }}">{{ oneNews.title|slice(0,50) }}</a></td>
+                <td>{{ oneNews.category.name }}</td>
+                <td>{{ oneNews.date|date('Y-m-d H:i:s') }}</td>
+                <td>{{ oneNews.countView }}</td>
+                <td>
+                    {% if oneNews.analyst %}
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                    {% else %}
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    {% endif %}
+                </td>
+                {#<td>#}
+                    {#{% if oneNews.category.limitation %}#}
+                        {#<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>#}
+                    {#{% else %}#}
+                        {#<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>#}
+                    {#{% endif %}#}
+                {#</td>#}
+                <td>
+                    <a href="{{ path('admin_news_edit', {id: oneNews.id}) }}"><span class="glyphicon glyphicon-pencil btn btn-default"></span></a>
+                    <a href="{{ path('admin_news_delete', {id: oneNews.id}) }}"><span class="glyphicon glyphicon-trash btn btn-default"></span></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
